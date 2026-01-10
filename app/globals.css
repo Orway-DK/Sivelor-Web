@@ -1,26 +1,67 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Tailwind Utility'leri için Değişken Eşlemeleri */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+
+  --tracking-brand: 0.25em;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  /* Light Mode - Sivelor Standart */
+  --background: #ffffff;
+  --foreground: #121212;
+
+  --primary: #121212; /* Matbaa Siyahı */
+  --secondary: #737373; /* Gümüş Gri */
+  --accent: #f5f5dc; /* Studio Krem */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    /* Dark Mode - Sivelor Premium */
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #f5f5f5;
+
+    --primary: #f5f5f5; /* Ters Otorite (Yazı odaklı) */
+    --secondary: #a3a3a3; /* Parlak Gümüş */
+    --accent: #262626; /* Koyu Studio (Gece Modu) */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply antialiased transition-colors duration-300;
+  }
+}
+
+@layer components {
+  /* Sivelor Logo Stili */
+  .brand-logo {
+    font-weight: 300;
+    letter-spacing: var(--tracking-brand);
+    @apply uppercase;
+  }
+
+  /* Fonksiyonel Kart ve Bölüm Yapıları */
+  .section-press {
+    background-color: var(--primary);
+    color: var(--background);
+  }
+
+  .section-studio {
+    background-color: var(--accent);
+    color: var(--foreground);
+    @apply border border-transparent dark:border-white/10;
+  }
+
+  /* Butonlar */
+  .btn-main {
+    @apply px-8 py-3 bg-[var(--primary)] text-[var(--background)] 
+           hover:opacity-90 transition-all active:scale-95 font-medium;
+  }
 }
