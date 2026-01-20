@@ -1,5 +1,6 @@
+// app\color\_components\Sidebar.tsx
 import React from "react";
-import { Channel, CMYK, VariationMode } from "../lib/constants";
+import { Channel, CMYK, VariationMode } from "../../../lib/constants";
 
 interface SidebarProps {
   baseCmyk: CMYK;

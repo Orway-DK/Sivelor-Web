@@ -1,3 +1,4 @@
+// app\color\page.tsx
 "use client";
 
 import React, { useState, useRef } from "react";
@@ -9,7 +10,7 @@ import {
   TEMPLATE_PRESETS,
   VariationMode,
   OperationMode,
-} from "./lib/constants";
+} from "../../lib/constants";
 import Sidebar from "./_components/Sidebar";
 import Navbar from "./_components/Navbar";
 import CanvasBoard, { CanvasBoardRef } from "./_components/CanvasBoard";

@@ -1,3 +1,4 @@
+// app\color\_components\Navbar.tsx
 import React from "react";
 import {
   PaperSize,
@@ -5,7 +6,7 @@ import {
   TemplateSpec,
   TEMPLATE_PRESETS,
   VariationMode,
-} from "../lib/constants";
+} from "../../../lib/constants";
 
 interface NavbarProps {
   activePaper: PaperSize;

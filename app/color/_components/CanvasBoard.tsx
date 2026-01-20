@@ -1,3 +1,4 @@
+// app\color\_components\CanvasBoard.tsx
 'use client'
 
 import React, {
@@ -16,7 +17,7 @@ import {
   getContrastColor,
   VariationMode,
   Channel
-} from '../lib/constants'
+} from '../../../lib/constants'
 
 const mmToPx = (mm: number) => mm * 3.7795
 
