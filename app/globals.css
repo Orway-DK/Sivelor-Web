@@ -1,67 +1,53 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Tailwind Utility'leri için Değişken Eşlemeleri */
-  --color-primary: var(--primary);
-  --color-secondary: var(--secondary);
-  --color-accent: var(--accent);
+  /* Arka planlar */
+  --color-bg-main: var(--bg-main);
+  --color-bg-press: var(--bg-press);
+  --color-bg-studio: var(--bg-studio);
+
+  /* Yazılar */
+  --color-txt-main: var(--txt-main);
+  --color-txt-silver: var(--txt-silver);
 
   --tracking-brand: 0.25em;
 }
 
 :root {
-  /* Light Mode - Sivelor Standart */
-  --background: #ffffff;
-  --foreground: #121212;
+  /* LIGHT MODE */
+  --bg-main: #ffffff;
+  --bg-press: #121212; /* Matbaa alanı: Siyah */
+  --bg-studio: #f5f5dc; /* Studio alanı: Krem */
 
-  --primary: #121212; /* Matbaa Siyahı */
-  --secondary: #737373; /* Gümüş Gri */
-  --accent: #f5f5dc; /* Studio Krem */
+  --txt-main: #121212;
+  --txt-silver: #a3a3a3; /* Gümüş Gri */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Dark Mode - Sivelor Premium */
-    --background: #0a0a0a;
-    --foreground: #f5f5f5;
+    /* DARK MODE */
+    --bg-main: #0a0a0a;
+    --bg-press: #000000; /* Daha derin siyah */
+    --bg-studio: #1a1a15; /* Koyu krem/zeytin */
 
-    --primary: #f5f5f5; /* Ters Otorite (Yazı odaklı) */
-    --secondary: #a3a3a3; /* Parlak Gümüş */
-    --accent: #262626; /* Koyu Studio (Gece Modu) */
+    --txt-main: #f5f5f5;
+    --txt-silver: #d4d4d4; /* Parlak Gümüş */
   }
 }
 
 @layer base {
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: var(--bg-main);
+    color: var(--txt-main);
     @apply antialiased transition-colors duration-300;
   }
 }
 
 @layer components {
-  /* Sivelor Logo Stili */
+  /* Sivelor Logo Stili - İstediğin Uppercase ve Geniş Aralık */
   .brand-logo {
+    text-transform: uppercase;
     font-weight: 300;
     letter-spacing: var(--tracking-brand);
-    @apply uppercase;
-  }
-
-  /* Fonksiyonel Kart ve Bölüm Yapıları */
-  .section-press {
-    background-color: var(--primary);
-    color: var(--background);
-  }
-
-  .section-studio {
-    background-color: var(--accent);
-    color: var(--foreground);
-    @apply border border-transparent dark:border-white/10;
-  }
-
-  /* Butonlar */
-  .btn-main {
-    @apply px-8 py-3 bg-[var(--primary)] text-[var(--background)] 
-           hover:opacity-90 transition-all active:scale-95 font-medium;
   }
 }
