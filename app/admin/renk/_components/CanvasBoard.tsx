@@ -17,7 +17,7 @@ import {
   getContrastColor,
   VariationMode,
   Channel
-} from '../../../lib/constants'
+} from '@/lib/constants'
 
 const mmToPx = (mm: number) => mm * 3.7795
 
@@ -304,7 +304,7 @@ const CanvasBoard = forwardRef<CanvasBoardRef, CanvasBoardProps>(
     return (
       <div
         ref={containerRef}
-        className='flex-1 overflow-hidden relative cursor-move bg-gray-700 flex items-center justify-center touch-none'
+        className='flex-1 overflow-hidden relative cursor-move admin-canvas-container flex items-center justify-center touch-none'
         onWheel={handleWheel}
         onMouseDown={e => {
           if (e.button === 0) {

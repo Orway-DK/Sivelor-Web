@@ -1,6 +1,6 @@
 // app\color\_components\Sidebar.tsx
 import React from "react";
-import { Channel, CMYK, VariationMode } from "../../../lib/constants";
+import { Channel, CMYK, VariationMode } from "@/lib/constants";
 
 interface SidebarProps {
   baseCmyk: CMYK;
@@ -26,10 +26,10 @@ const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <aside className="w-full md:w-[360px] flex flex-col bg-white border-r border-gray-300 shadow-xl z-20 shrink-0 h-full text-gray-900">
+    <aside className="w-full md:w-[360px] flex flex-col admin-sidebar border-r border-admin-border-primary shadow-xl z-20 shrink-0 h-full admin-text-primary">
       {/* Header */}
-      <div className="px-5 py-4 border-b border-gray-200 bg-gray-50">
-        <h1 className="text-lg font-bold text-gray-900">
+      <div className="px-5 py-4 border-b border-admin-border-primary admin-bg-primary">
+        <h1 className="text-lg font-bold admin-text-primary">
           Renk & Grid Ayarları
         </h1>
       </div>
@@ -37,20 +37,20 @@ const Sidebar: React.FC<SidebarProps> = ({
       <div className="flex-1 overflow-y-auto p-4 md:p-5 space-y-6 md:space-y-8">
         {/* 1. ANA RENK (Merkez) */}
         <section>
-          <h3 className="text-xs font-bold text-gray-900 border-b border-gray-200 pb-2 mb-3 uppercase tracking-wider">
+          <h3 className="text-xs font-bold admin-text-primary border-b border-admin-border-primary pb-2 mb-3 uppercase tracking-wider">
             Merkez Renk (Ana)
           </h3>
           <div className="grid grid-cols-2 gap-2 md:gap-3">
             {(["c", "m", "y", "k"] as Channel[]).map((key) => (
               <div
                 key={key}
-                className="bg-gray-50 p-2 rounded border border-gray-200"
+                className="admin-bg-secondary p-2 rounded border border-admin-border-primary"
               >
                 <div className="flex justify-between items-center mb-1">
-                  <label className="text-[10px] font-bold text-gray-600 uppercase">
+                  <label className="text-[10px] font-bold admin-text-tertiary uppercase">
                     {key.toUpperCase()}
                   </label>
-                  <span className="text-[10px] font-mono font-bold text-gray-900">
+                  <span className="text-[10px] font-mono font-bold admin-text-primary">
                     {baseCmyk[key].toFixed(2)}
                   </span>
                 </div>
@@ -80,7 +80,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     }`}
                 />
 
-                {/* Number Input (Force Style: bg-white text-gray-900) */}
+                {/* Number Input */}
                 <input
                   type="number"
                   min="0"
@@ -93,7 +93,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                       [key]: parseFloat(e.target.value) || 0,
                     }))
                   }
-                  className="w-full text-xs border border-gray-300 rounded px-2 py-1 bg-white text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className="w-full text-xs admin-input rounded px-2 py-1 focus:ring-1 focus:ring-blue-500"
                 />
               </div>
             ))}
@@ -102,20 +102,20 @@ const Sidebar: React.FC<SidebarProps> = ({
 
         {/* 2. VARYASYON YÖNLERİ */}
         <section>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-200 pb-2 mb-3 gap-2">
-            <h3 className="text-xs font-bold text-gray-900 uppercase tracking-wider">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-admin-border-primary pb-2 mb-3 gap-2">
+            <h3 className="text-xs font-bold admin-text-primary uppercase tracking-wider">
               Yön & İşlem
             </h3>
 
             {/* Ekle / Çıkar Butonları */}
-            <div className="flex bg-gray-200 rounded p-0.5 self-start">
+            <div className="flex admin-bg-tertiary rounded p-0.5 self-start">
               <button
                 onClick={() => handleInputChange("operation", "add")}
                 className={`px-2 md:px-3 py-1 text-[10px] font-bold rounded transition-colors
                       ${
                         settings.operation === "add"
-                          ? "bg-green-600 text-white shadow-sm"
-                          : "text-gray-600 hover:bg-gray-300"
+                          ? "bg-green-600 admin-text-primary shadow-sm"
+                          : "admin-text-tertiary hover:admin-bg-secondary"
                       }`}
               >
                 EKLE (+)
@@ -125,8 +125,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                 className={`px-2 md:px-3 py-1 text-[10px] font-bold rounded transition-colors
                       ${
                         settings.operation === "subtract"
-                          ? "bg-red-600 text-white shadow-sm"
-                          : "text-gray-600 hover:bg-gray-300"
+                          ? "bg-red-600 admin-text-primary shadow-sm"
+                          : "admin-text-tertiary hover:admin-bg-secondary"
                       }`}
               >
                 ÇIKAR (-)
@@ -136,11 +136,11 @@ const Sidebar: React.FC<SidebarProps> = ({
 
           {/* Mod Kontrolü */}
           {variationMode === "4-way" ? (
-            <div className="space-y-3 bg-gray-50 p-3 rounded border border-gray-200">
+            <div className="space-y-3 admin-bg-secondary p-3 rounded border border-admin-border-primary">
               {/* YUKARI */}
               <div className="flex justify-center">
                 <div className="text-center w-20 md:w-28">
-                  <label className="text-[9px] font-bold text-gray-500 block mb-1">
+                  <label className="text-[9px] font-bold admin-text-tertiary block mb-1">
                     YUKARI (Artar)
                   </label>
                   <select
@@ -148,7 +148,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     onChange={(e) =>
                       handleInputChange("topChannel", e.target.value)
                     }
-                    className="w-full border border-gray-300 rounded px-2 py-1.5 text-xs text-center bg-white text-gray-900 focus:ring-1 focus:ring-blue-500"
+                    className="w-full admin-input rounded px-2 py-1.5 text-xs text-center focus:ring-1 focus:ring-blue-500"
                   >
                     <option value="c">Cyan (Mavi)</option>
                     <option value="m">Magenta (Kırmızı)</option>
@@ -161,7 +161,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               {/* SOL - ORTA - SAĞ */}
               <div className="flex justify-between items-center px-1 gap-2">
                 <div className="w-20 md:w-28">
-                  <label className="text-[9px] font-bold text-gray-500 block mb-1">
+                  <label className="text-[9px] font-bold admin-text-tertiary block mb-1">
                     SOL (Artar)
                   </label>
                   <select
@@ -169,7 +169,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     onChange={(e) =>
                       handleInputChange("leftChannel", e.target.value)
                     }
-                    className="w-full border border-gray-300 rounded px-2 py-1.5 text-xs bg-white text-gray-900 focus:ring-1 focus:ring-blue-500"
+                    className="w-full admin-input rounded px-2 py-1.5 text-xs focus:ring-1 focus:ring-blue-500"
                   >
                     <option value="c">Cyan</option>
                     <option value="m">Magenta</option>
@@ -179,12 +179,12 @@ const Sidebar: React.FC<SidebarProps> = ({
                 </div>
 
                 {/* Görsel İkon */}
-                <div className="text-2xl font-bold text-gray-300 select-none">
+                <div className="text-2xl font-bold admin-text-tertiary select-none">
                   +
                 </div>
 
                 <div className="w-20 md:w-28 text-right">
-                  <label className="text-[9px] font-bold text-gray-500 block mb-1">
+                  <label className="text-[9px] font-bold admin-text-tertiary block mb-1">
                     SAĞ (Artar)
                   </label>
                   <select
@@ -192,7 +192,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     onChange={(e) =>
                       handleInputChange("rightChannel", e.target.value)
                     }
-                    className="w-full border border-gray-300 rounded px-2 py-1.5 text-xs text-right bg-white text-gray-900 focus:ring-1 focus:ring-blue-500"
+                    className="w-full admin-input rounded px-2 py-1.5 text-xs text-right focus:ring-1 focus:ring-blue-500"
                   >
                     <option value="c">Cyan</option>
                     <option value="m">Magenta</option>
@@ -205,7 +205,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               {/* AŞAĞI */}
               <div className="flex justify-center">
                 <div className="text-center w-20 md:w-28">
-                  <label className="text-[9px] font-bold text-gray-500 block mb-1">
+                  <label className="text-[9px] font-bold admin-text-tertiary block mb-1">
                     AŞAĞI (Artar)
                   </label>
                   <select
@@ -213,7 +213,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     onChange={(e) =>
                       handleInputChange("bottomChannel", e.target.value)
                     }
-                    className="w-full border border-gray-300 rounded px-2 py-1.5 text-xs text-center bg-white text-gray-900 focus:ring-1 focus:ring-blue-500"
+                    className="w-full admin-input rounded px-2 py-1.5 text-xs text-center focus:ring-1 focus:ring-blue-500"
                   >
                     <option value="c">Cyan</option>
                     <option value="m">Magenta</option>
@@ -225,17 +225,16 @@ const Sidebar: React.FC<SidebarProps> = ({
             </div>
           ) : (
             // 2-EKSEN MODU AKTİFSE
-            <div className="bg-blue-50 border border-blue-100 p-4 rounded text-center">
-              <p className="text-xs text-blue-800 font-semibold">
+            <div className="bg-blue-900/20 border border-blue-500/20 p-4 rounded text-center">
+              <p className="text-xs text-blue-300 font-semibold">
                 2-Eksen Modu Aktif
               </p>
-              <p className="text-[10px] text-blue-600 mt-1">
+              <p className="text-[10px] text-blue-400 mt-1">
                 X ve Y eksenlerini üst menüden seçebilirsiniz.
               </p>
-              {/* Eğer 2-Eksen kontrollerini buraya geri almak istersen buraya ekleyebiliriz */}
               <div className="mt-3 grid grid-cols-2 gap-2 text-left">
                 <div>
-                  <label className="text-[9px] font-bold text-gray-500 block">
+                  <label className="text-[9px] font-bold admin-text-tertiary block">
                     X EKSENİ
                   </label>
                   <select
@@ -243,7 +242,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     onChange={(e) =>
                       handleInputChange("xAxisChannel", e.target.value)
                     }
-                    className="w-full border rounded px-1 py-1 text-xs bg-white text-gray-900"
+                    className="w-full admin-input rounded px-1 py-1 text-xs"
                   >
                     <option value="c">Cyan</option>
                     <option value="m">Magenta</option>
@@ -252,7 +251,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   </select>
                 </div>
                 <div>
-                  <label className="text-[9px] font-bold text-gray-500 block">
+                  <label className="text-[9px] font-bold admin-text-tertiary block">
                     Y EKSENİ
                   </label>
                   <select
@@ -260,7 +259,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     onChange={(e) =>
                       handleInputChange("yAxisChannel", e.target.value)
                     }
-                    className="w-full border rounded px-1 py-1 text-xs bg-white text-gray-900"
+                    className="w-full admin-input rounded px-1 py-1 text-xs"
                   >
                     <option value="c">Cyan</option>
                     <option value="m">Magenta</option>
@@ -275,16 +274,16 @@ const Sidebar: React.FC<SidebarProps> = ({
 
         {/* 3. GRID & BOYUT AYARLARI */}
         <section>
-          <h3 className="text-xs font-bold text-gray-900 border-b border-gray-200 pb-2 mb-3 uppercase tracking-wider">
+          <h3 className="text-xs font-bold admin-text-primary border-b border-admin-border-primary pb-2 mb-3 uppercase tracking-wider">
             Kutu & Yerleşim
           </h3>
 
-          <div className="flex items-center justify-between bg-blue-50 p-3 rounded border border-blue-100 mb-4">
+          <div className="flex items-center justify-between bg-blue-900/20 p-3 rounded border border-blue-500/20 mb-4">
             <div>
-              <span className="text-xs font-bold text-blue-900 block">
+              <span className="text-xs font-bold text-blue-300 block">
                 Otomatik Sığdır
               </span>
-              <span className="text-[10px] text-blue-700">
+              <span className="text-[10px] text-blue-400">
                 Sayfayı dolduracak kadar
               </span>
             </div>
@@ -292,13 +291,13 @@ const Sidebar: React.FC<SidebarProps> = ({
               type="checkbox"
               checked={settings.isAutoFit}
               onChange={(e) => handleInputChange("isAutoFit", e.target.checked)}
-              className="w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+              className="w-5 h-5 text-blue-500 rounded border-admin-border-primary focus:ring-blue-500"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
             <div>
-              <label className="text-[10px] font-bold text-gray-600 block mb-1">
+              <label className="text-[10px] font-bold admin-text-tertiary block mb-1">
                 Kutu Boyutu (mm)
               </label>
               <input
@@ -308,11 +307,11 @@ const Sidebar: React.FC<SidebarProps> = ({
                 onChange={(e) =>
                   handleInputChange("patchSizeMm", Number(e.target.value))
                 }
-                className="w-full border border-gray-300 rounded p-2 text-xs bg-white text-gray-900 focus:ring-1 focus:ring-blue-500"
+                className="w-full admin-input rounded p-2 text-xs focus:ring-1 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="text-[10px] font-bold text-gray-600 block mb-1">
+              <label className="text-[10px] font-bold admin-text-tertiary block mb-1">
                 Boşluk (mm)
               </label>
               <input
@@ -322,13 +321,13 @@ const Sidebar: React.FC<SidebarProps> = ({
                 onChange={(e) =>
                   handleInputChange("gapMm", Number(e.target.value))
                 }
-                className="w-full border border-gray-300 rounded p-2 text-xs bg-white text-gray-900 focus:ring-1 focus:ring-blue-500"
+                className="w-full admin-input rounded p-2 text-xs focus:ring-1 focus:ring-blue-500"
               />
             </div>
           </div>
 
           <div className="mt-4">
-            <label className="text-[10px] font-bold text-gray-600 block mb-1">
+            <label className="text-[10px] font-bold admin-text-tertiary block mb-1">
               Değişim Miktarı (Step %)
             </label>
             <div className="flex items-center gap-2">
@@ -341,7 +340,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 onChange={(e) =>
                   handleInputChange("stepValue", parseFloat(e.target.value))
                 }
-                className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                className="flex-1 h-2 admin-bg-tertiary rounded-lg appearance-none cursor-pointer"
               />
               <input
                 type="number"
@@ -352,16 +351,16 @@ const Sidebar: React.FC<SidebarProps> = ({
                 onChange={(e) =>
                   handleInputChange("stepValue", parseFloat(e.target.value) || 0.01)
                 }
-                className="w-20 text-center border border-gray-300 rounded p-1 text-xs bg-white text-gray-900 font-bold"
+                className="w-20 text-center admin-input rounded p-1 text-xs font-bold"
               />
             </div>
           </div>
 
           {/* Manuel Grid Ayarları (Sadece Auto kapalıysa) */}
           {!settings.isAutoFit && (
-            <div className="mt-4 pt-4 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 animate-in fade-in">
+            <div className="mt-4 pt-4 border-t border-admin-border-primary grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 animate-in fade-in">
               <div>
-                <label className="text-[10px] font-bold text-gray-600 block mb-1">
+                <label className="text-[10px] font-bold admin-text-tertiary block mb-1">
                   Satır Sayısı
                 </label>
                 <input
@@ -370,11 +369,11 @@ const Sidebar: React.FC<SidebarProps> = ({
                   onChange={(e) =>
                     handleInputChange("manualRows", Number(e.target.value))
                   }
-                  className="w-full border border-gray-300 rounded p-2 text-xs bg-white text-gray-900"
+                  className="w-full admin-input rounded p-2 text-xs"
                 />
               </div>
               <div>
-                <label className="text-[10px] font-bold text-gray-600 block mb-1">
+                <label className="text-[10px] font-bold admin-text-tertiary block mb-1">
                   Sütun Sayısı
                 </label>
                 <input
@@ -383,7 +382,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   onChange={(e) =>
                     handleInputChange("manualCols", Number(e.target.value))
                   }
-                  className="w-full border border-gray-300 rounded p-2 text-xs bg-white text-gray-900"
+                  className="w-full admin-input rounded p-2 text-xs"
                 />
               </div>
             </div>

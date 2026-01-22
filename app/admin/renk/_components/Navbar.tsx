@@ -6,7 +6,7 @@ import {
   TemplateSpec,
   TEMPLATE_PRESETS,
   VariationMode,
-} from "../../../lib/constants";
+} from "@/lib/constants";
 
 interface NavbarProps {
   activePaper: PaperSize;
@@ -26,13 +26,13 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = (props) => {
   return (
-    <div className="h-auto md:h-16 bg-gray-800 flex flex-col md:flex-row items-stretch md:items-center justify-between px-3 md:px-4 shadow-md text-white z-10 shrink-0 overflow-x-auto overflow-y-hidden">
+    <div className="h-auto md:h-16 admin-bg-primary border-b border-admin-border-primary flex flex-col md:flex-row items-stretch md:items-center justify-between px-3 md:px-4 admin-text-primary z-10 shrink-0 overflow-x-auto overflow-y-hidden">
       <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between w-full min-w-0">
         {/* SOL: Ayarlar */}
         <div className="flex flex-wrap items-center gap-2 md:gap-4 py-2 md:py-0">
           {/* Kağıt */}
           <div className="flex flex-col shrink-0 min-w-[120px]">
-            <span className="text-[9px] text-gray-400 font-bold uppercase">
+            <span className="text-[9px] admin-text-tertiary font-bold uppercase">
               Kağıt
             </span>
             <select
@@ -42,7 +42,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                   PAPER_PRESETS.find((p) => p.id === e.target.value)!
                 )
               }
-              className="bg-gray-700 text-white text-xs border border-gray-600 rounded px-2 py-1 cursor-pointer w-full"
+              className="admin-input text-xs rounded px-2 py-1 cursor-pointer w-full"
             >
               {PAPER_PRESETS.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -64,7 +64,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                   TEMPLATE_PRESETS.find((t) => t.id === e.target.value)!
                 )
               }
-              className="bg-gray-700 text-white text-xs border border-blue-500 rounded px-2 py-1 cursor-pointer w-full"
+              className="admin-input text-xs border border-blue-500 rounded px-2 py-1 cursor-pointer w-full"
             >
               {TEMPLATE_PRESETS.map((t) => (
                 <option key={t.id} value={t.id}>
@@ -76,16 +76,16 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 
           {/* Mod Toggle (Yön butonu gitti) */}
           <div className="flex flex-col shrink-0">
-            <span className="text-[9px] text-gray-400 font-bold uppercase">
+            <span className="text-[9px] admin-text-tertiary font-bold uppercase">
               Mod
             </span>
-            <div className="flex bg-gray-700 rounded p-0.5 border border-gray-600">
+            <div className="flex admin-bg-secondary rounded p-0.5 border border-admin-border-primary">
               <button
                 onClick={() => props.setVariationMode("2-axis")}
                 className={`px-2 py-0.5 text-[10px] rounded transition-colors ${
                   props.variationMode === "2-axis"
-                    ? "bg-blue-600"
-                    : "text-gray-400 hover:text-white"
+                    ? "bg-blue-600 admin-text-primary"
+                    : "admin-text-tertiary hover:admin-text-primary"
                 }`}
               >
                 2-Eksen
@@ -94,8 +94,8 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                 onClick={() => props.setVariationMode("4-way")}
                 className={`px-2 py-0.5 text-[10px] rounded transition-colors ${
                   props.variationMode === "4-way"
-                    ? "bg-purple-600"
-                    : "text-gray-400 hover:text-white"
+                    ? "bg-purple-600 admin-text-primary"
+                    : "admin-text-tertiary hover:admin-text-primary"
                 }`}
               >
                 4-Yön
@@ -105,42 +105,42 @@ const Navbar: React.FC<NavbarProps> = (props) => {
         </div>
 
         {/* ORTA: Görünüm Kontrol */}
-        <div className="flex items-center justify-between md:justify-center space-x-3 mx-0 md:mx-4 shrink-0 py-2 md:py-0 border-t md:border-t-0 border-gray-700 md:border-none">
+        <div className="flex items-center justify-between md:justify-center space-x-3 mx-0 md:mx-4 shrink-0 py-2 md:py-0 border-t md:border-t-0 border-admin-border-primary md:border-none">
           <label className="flex items-center space-x-2 text-xs cursor-pointer select-none">
             <input
               type="checkbox"
               checked={props.showSafeZone}
               onChange={(e) => props.setShowSafeZone(e.target.checked)}
-              className="rounded text-blue-500 focus:ring-0 bg-gray-700 border-gray-600"
+              className="rounded text-blue-500 focus:ring-0 admin-bg-secondary border-admin-border-primary"
             />
-            <span className="text-gray-300 whitespace-nowrap">
+            <span className="admin-text-tertiary whitespace-nowrap">
               Güvenli Alan
             </span>
           </label>
-          <div className="h-6 w-px bg-gray-600 hidden md:block"></div>
+          <div className="h-6 w-px bg-admin-border-primary hidden md:block"></div>
           <button
             onClick={props.onResetView}
-            className="text-xs bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded border border-gray-600 whitespace-nowrap"
+            className="text-xs admin-button-secondary px-2 py-1 rounded whitespace-nowrap"
           >
             Ortala
           </button>
         </div>
 
         {/* SAĞ: Export */}
-        <div className="flex items-center justify-between md:justify-end space-x-2 shrink-0 py-2 md:py-0 border-t md:border-t-0 border-gray-700 md:border-none">
+        <div className="flex items-center justify-between md:justify-end space-x-2 shrink-0 py-2 md:py-0 border-t md:border-t-0 border-admin-border-primary md:border-none">
           <button
             onClick={() => props.onExportPdf("cut")}
-            className="bg-gray-700 hover:bg-gray-600 text-white px-2 md:px-3 py-1.5 rounded text-xs border border-gray-500 transition flex flex-col items-center leading-none min-w-[100px] md:min-w-[70px] flex-1 md:flex-none"
+            className="admin-button-secondary px-2 md:px-3 py-1.5 rounded text-xs transition flex flex-col items-center leading-none min-w-[100px] md:min-w-[70px] flex-1 md:flex-none"
           >
             <span className="font-bold whitespace-nowrap">BIÇAK PDF</span>
-            <span className="text-[9px] text-gray-400 mt-0.5">
+            <span className="text-[9px] admin-text-tertiary mt-0.5">
               Sadece Çizgi
             </span>
           </button>
 
           <button
             onClick={() => props.onExportPdf("print")}
-            className="bg-red-600 hover:bg-red-500 text-white px-3 md:px-4 py-1.5 rounded text-xs shadow-lg transition flex flex-col items-center leading-none min-w-[100px] md:min-w-[80px] flex-1 md:flex-none"
+            className="bg-red-600 hover:bg-red-500 admin-text-primary px-3 md:px-4 py-1.5 rounded text-xs shadow-lg transition flex flex-col items-center leading-none min-w-[100px] md:min-w-[80px] flex-1 md:flex-none"
           >
             <span className="font-bold whitespace-nowrap">BASKI PDF</span>
             <span className="text-[9px] text-red-200 mt-0.5">Full Çıktı</span>

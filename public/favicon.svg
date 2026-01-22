@@ -1,0 +1,17 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="8" fill="#050505"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" stroke="white" stroke-opacity="0.05"/>
+  <path d="M19.5 11.5C19.5 10.1193 18.3807 9 17 9H14C12.3431 9 11 10.3431 11 12C11 13.6569 12.3431 15 14 15H17C18.6569 15 20 16.3431 20 18C20 19.6569 18.6569 21 17 21H14C12.6193 21 11.5 19.8807 11.5 18.5" 
+    stroke="url(#silver_grad)" 
+    stroke-width="1.2" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+  />
+  <defs>
+    <linearGradient id="silver_grad" x1="11" y1="9" x2="20" y2="21" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white"/>
+      <stop offset="0.5" stop-color="#D1D5DB"/>
+      <stop offset="1" stop-color="#6B7280"/>
+    </linearGradient>
+  </defs>
+</svg>

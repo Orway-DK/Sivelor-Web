@@ -1,0 +1,210 @@
+/* Admin Global CSS Variables - Theme System */
+:root {
+  /* Light Theme - Default */
+  --admin-bg-primary: #ffffff;
+  --admin-bg-secondary: #f8f9fa;
+  --admin-bg-tertiary: #e9ecef;
+  --admin-bg-sidebar: #f1f3f5; /* Açık gri sidebar rengi */
+  --admin-bg-main-sidebar: #f1f3f5; /* Ana admin sidebar için de açık renk */
+  
+  --admin-border-primary: #dee2e6;
+  --admin-border-secondary: #ced4da;
+  --admin-border-accent: #6c757d;
+  
+  --admin-text-primary: #212529;
+  --admin-text-secondary: #6c757d;
+  --admin-text-tertiary: #adb5bd;
+  --admin-text-inverse: #ffffff;
+  --admin-text-sidebar: #212529; /* Sidebar metin rengi */
+  --admin-text-main-sidebar: #212529; /* Ana admin sidebar metin rengi de koyu */
+  
+  --admin-accent-primary: #0d6efd;
+  --admin-accent-secondary: #6f42c1;
+  --admin-accent-success: #198754;
+  --admin-accent-warning: #ffc107;
+  --admin-accent-danger: #dc3545;
+  
+  --admin-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --admin-shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --admin-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  
+  /* Component Specific */
+  --admin-canvas-bg: #f8f9fa;
+  --admin-sidebar-width: 16rem;
+  --admin-header-height: 4rem;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme */
+  --admin-bg-primary: #121212;
+  --admin-bg-secondary: #1a1a1a;
+  --admin-bg-tertiary: #2c2c2c;
+  --admin-bg-sidebar: #0d0d0d;
+  --admin-bg-main-sidebar: #0d0d0d;
+  
+  --admin-border-primary: #2c2c2c;
+  --admin-border-secondary: #3c3c3c;
+  --admin-border-accent: #4a4a4a;
+  
+  --admin-text-primary: #ffffff;
+  --admin-text-secondary: #9a9a9a;
+  --admin-text-tertiary: #6b6b6b;
+  --admin-text-inverse: #121212;
+  --admin-text-sidebar: #ffffff;
+  --admin-text-main-sidebar: #ffffff;
+  
+  --admin-accent-primary: #0d6efd;
+  --admin-accent-secondary: #6f42c1;
+  --admin-accent-success: #198754;
+  --admin-accent-warning: #ffc107;
+  --admin-accent-danger: #dc3545;
+  
+  --admin-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
+  --admin-shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+  --admin-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.9);
+  
+  /* Component Specific */
+  --admin-canvas-bg: #121212;
+}
+
+[data-theme="light"] {
+  /* Light Theme (explicit) */
+  --admin-bg-primary: #ffffff;
+  --admin-bg-secondary: #f8f9fa;
+  --admin-bg-tertiary: #e9ecef;
+  --admin-bg-sidebar: #f1f3f5; /* Açık gri sidebar rengi */
+  --admin-bg-main-sidebar: #f1f3f5; /* Ana admin sidebar için de açık renk */
+  
+  --admin-border-primary: #dee2e6;
+  --admin-border-secondary: #ced4da;
+  --admin-border-accent: #6c757d;
+  
+  --admin-text-primary: #212529;
+  --admin-text-secondary: #6c757d;
+  --admin-text-tertiary: #adb5bd;
+  --admin-text-inverse: #ffffff;
+  --admin-text-sidebar: #212529; /* Sidebar metin rengi */
+  --admin-text-main-sidebar: #212529; /* Ana admin sidebar metin rengi de koyu */
+  
+  --admin-accent-primary: #0d6efd;
+  --admin-accent-secondary: #6f42c1;
+  --admin-accent-success: #198754;
+  --admin-accent-warning: #ffc107;
+  --admin-accent-danger: #dc3545;
+  
+  --admin-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --admin-shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --admin-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  
+  /* Component Specific */
+  --admin-canvas-bg: #f8f9fa;
+}
+
+/* Utility Classes for Admin Components */
+.admin-bg-primary {
+  background-color: var(--admin-bg-primary);
+}
+
+.admin-bg-secondary {
+  background-color: var(--admin-bg-secondary);
+}
+
+.admin-bg-tertiary {
+  background-color: var(--admin-bg-tertiary);
+}
+
+.admin-bg-sidebar {
+  background-color: var(--admin-bg-sidebar);
+}
+
+.admin-border-primary {
+  border-color: var(--admin-border-primary);
+}
+
+.admin-border-secondary {
+  border-color: var(--admin-border-secondary);
+}
+
+.admin-text-primary {
+  color: var(--admin-text-primary);
+}
+
+.admin-text-secondary {
+  color: var(--admin-text-secondary);
+}
+
+.admin-text-tertiary {
+  color: var(--admin-text-tertiary);
+}
+
+.admin-text-inverse {
+  color: var(--admin-text-inverse);
+}
+
+.admin-text-sidebar {
+  color: var(--admin-text-sidebar);
+}
+
+.admin-text-main-sidebar {
+  color: var(--admin-text-main-sidebar);
+}
+
+.admin-bg-main-sidebar {
+  background-color: var(--admin-bg-main-sidebar);
+}
+
+/* Transition for theme switching */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Admin specific overrides */
+.admin-container {
+  background-color: var(--admin-bg-primary);
+  color: var(--admin-text-primary);
+}
+
+.admin-sidebar {
+  background-color: var(--admin-bg-sidebar);
+  border-right: 1px solid var(--admin-border-primary);
+}
+
+.admin-main-sidebar {
+  background-color: var(--admin-bg-main-sidebar);
+  color: var(--admin-text-main-sidebar);
+  border-right: 1px solid var(--admin-border-primary);
+}
+
+.admin-card {
+  background-color: var(--admin-bg-secondary);
+  border: 1px solid var(--admin-border-primary);
+  border-radius: 0.5rem;
+  box-shadow: var(--admin-shadow-sm);
+}
+
+.admin-input {
+  background-color: var(--admin-bg-secondary);
+  border: 1px solid var(--admin-border-primary);
+  color: var(--admin-text-primary);
+}
+
+.admin-input:focus {
+  border-color: var(--admin-accent-primary);
+  outline: none;
+}
+
+.admin-button-primary {
+  background-color: var(--admin-accent-primary);
+  color: var(--admin-text-inverse);
+}
+
+.admin-button-secondary {
+  background-color: var(--admin-bg-tertiary);
+  color: var(--admin-text-primary);
+  border: 1px solid var(--admin-border-primary);
+}
+
+/* Canvas specific */
+.admin-canvas-container {
+  background-color: var(--admin-canvas-bg);
+}
