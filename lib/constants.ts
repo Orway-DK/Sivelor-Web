@@ -91,10 +91,9 @@ export interface PaperSize {
 }
 
 export const PAPER_PRESETS: PaperSize[] = [
-  { id: 'konica', name: 'Konica (330x487mm)', w: 330, h: 487 },
   { id: 'xerox', name: 'Xerox / Standart (350x500mm)', w: 350, h: 500 },
-  { id: '35x50', name: '35x50 (350x500mm)', w: 350, h: 500 }, // Index 2
-  { id: '32x45', name: '32x45 (320x450mm)', w: 320, h: 450 } // Index 3
+  { id: 'konica', name: 'Konica (330x487mm)', w: 330, h: 487 },
+  { id: '32x45', name: '32x45 (320x450mm)', w: 320, h: 450 }
 ]
 
 export const SUMMA_CONFIGS: Record<string, any> = {

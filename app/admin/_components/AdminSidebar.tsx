@@ -42,13 +42,15 @@ export default function AdminSidebar ({ userEmail }: { userEmail: string }) {
     >
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className='absolute -right-3 top-10 w-6 h-6 bg-admin-bg-tertiary border border-admin-border-primary rounded-full flex items-center justify-center text-[10px] admin-text-primary z-50 hover:bg-admin-border-primary transition-all shadow-xl'
+        className='absolute -right-3 top-13 w-6 h-6 bg-white border border-admin-border-primary
+         rounded-full flex items-center justify-center text-[0.75rem] 
+         admin-text-primary z-50 hover:bg-admin-border-primary transition-all shadow-xl'
       >
         {isCollapsed ? <FaChevronRight /> : <FaChevronLeft />}
       </button>
 
       <div
-        className={`h-24 flex items-center border-b border-admin-border-primary admin-bg-primary overflow-hidden ${
+        className={`h-16 flex items-center border-b border-admin-border-primary admin-bg-primary overflow-hidden ${
           isCollapsed ? 'justify-center' : 'px-8'
         }`}
       >
@@ -57,9 +59,6 @@ export default function AdminSidebar ({ userEmail }: { userEmail: string }) {
             <h1 className='text-lg font-light admin-text-primary tracking-[0.3em] uppercase leading-none bg-gradient-to-b from-white via-gray-200 to-gray-500 bg-clip-text text-transparent italic'>
               SIVELOR
             </h1>
-            <span className='text-[7px] admin-text-tertiary uppercase tracking-[0.4em] font-bold mt-2'>
-              Intelligence
-            </span>
           </div>
         ) : (
           <span className='text-xl font-thin admin-text-primary italic'>S</span>
@@ -103,7 +102,11 @@ export default function AdminSidebar ({ userEmail }: { userEmail: string }) {
         }`}
       >
         {/* Theme Toggle Button */}
-        <div className={`flex ${isCollapsed ? 'justify-center' : 'justify-between items-center'}`}>
+        <div
+          className={`flex ${
+            isCollapsed ? 'justify-center' : 'justify-between items-center'
+          }`}
+        >
           {!isCollapsed && (
             <span className='text-[9px] admin-text-tertiary uppercase tracking-[0.2em] font-bold'>
               Tema
@@ -115,8 +118,12 @@ export default function AdminSidebar ({ userEmail }: { userEmail: string }) {
         {/* User Info */}
         {!isCollapsed && (
           <div className='pt-2 border-t border-admin-border-primary'>
-            <p className='text-[10px] admin-text-secondary truncate mb-1'>{userEmail}</p>
-            <p className='text-[8px] admin-text-tertiary uppercase tracking-[0.2em]'>Admin Panel</p>
+            <p className='text-[10px] admin-text-secondary truncate mb-1'>
+              {userEmail}
+            </p>
+            <p className='text-[8px] admin-text-tertiary uppercase tracking-[0.2em]'>
+              Admin Panel
+            </p>
           </div>
         )}
 

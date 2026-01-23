@@ -28,7 +28,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <aside className="w-full md:w-[360px] flex flex-col admin-sidebar border-r border-admin-border-primary shadow-xl z-20 shrink-0 h-full admin-text-primary">
       {/* Header */}
-      <div className="px-5 py-4 border-b border-admin-border-primary admin-bg-primary">
+      <div className="px-5 pt-[19px] pb-4 border-b border-admin-border-primary admin-bg-primary">
         <h1 className="text-lg font-bold admin-text-primary">
           Renk & Grid Ayarları
         </h1>
