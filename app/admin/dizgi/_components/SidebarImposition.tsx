@@ -29,6 +29,11 @@ export default function SidebarImposition ({
       safeVal = Math.max(1, Number(val))
     }
     setSpecs((p: any) => ({ ...p, [key]: safeVal }))
+    
+    // Şablon modu değiştiğinde safe area'yı otomatik göster
+    if (key === 'templateMode' && val !== 'none') {
+      setShowSafeArea(true)
+    }
   }
 
   const inputStyle =
@@ -168,21 +173,39 @@ export default function SidebarImposition ({
           3. Şablon
         </h3>
         <div className='grid grid-cols-3 gap-2'>
-          {['none', 'summa', 'plotter'].map(m => (
-            <button
-              key={m}
-              onClick={() => update('templateMode', m)}
-              className={`text-[9px] uppercase py-2.5 rounded-lg border font-bold transition-all ${
-                specs.templateMode === m
-                  ? 'admin-bg-tertiary border-admin-border-primary admin-text-primary shadow-lg'
-                  : 'admin-bg-secondary border-admin-border-primary admin-text-tertiary hover:admin-text-primary'
-              }`}
-            >
-              {m}
-            </button>
-          ))}
+          <button
+            onClick={() => update('templateMode', 'none')}
+            className={`text-[9px] uppercase py-2.5 rounded-lg border font-bold transition-all ${
+              specs.templateMode === 'none'
+                ? 'admin-bg-tertiary border-admin-border-primary admin-text-primary shadow-lg'
+                : 'admin-bg-secondary border-admin-border-primary admin-text-tertiary hover:admin-text-primary'
+            }`}
+          >
+            Yok
+          </button>
+          <button
+            onClick={() => update('templateMode', 'summa')}
+            className={`text-[9px] uppercase py-2.5 rounded-lg border font-bold transition-all ${
+              specs.templateMode === 'summa'
+                ? 'admin-bg-tertiary border-admin-border-primary admin-text-primary shadow-lg'
+                : 'admin-bg-secondary border-admin-border-primary admin-text-tertiary hover:admin-text-primary'
+            }`}
+          >
+            Summa
+          </button>
+          <button
+            onClick={() => update('templateMode', 'plotter')}
+            className={`text-[9px] uppercase py-2.5 rounded-lg border font-bold transition-all ${
+              specs.templateMode === 'plotter'
+                ? 'admin-bg-tertiary border-admin-border-primary admin-text-primary shadow-lg'
+                : 'admin-bg-secondary border-admin-border-primary admin-text-tertiary hover:admin-text-primary'
+            }`}
+          >
+            Plotter
+          </button>
         </div>
         <button
+          type="button"
           onClick={onExport}
           className='w-full py-4 admin-bg-secondary hover:admin-bg-tertiary border border-admin-border-primary rounded-xl text-[10px] font-bold tracking-[0.2em] uppercase transition-all flex items-center justify-center gap-2 admin-text-primary group mt-4'
         >
