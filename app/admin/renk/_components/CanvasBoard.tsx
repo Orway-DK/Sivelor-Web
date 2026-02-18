@@ -201,9 +201,21 @@ const CanvasBoard = forwardRef<CanvasBoardRef, CanvasBoardProps>(
         ctx.font = `${fontSize}px sans-serif`
         const p = mmToPx(1)
         ctx.fillText(`C:${box.cmyk.c.toFixed(2)}`, xPx + p, yPx + p + fontSize)
-        ctx.fillText(`M:${box.cmyk.m.toFixed(2)}`, xPx + p, yPx + p + fontSize * 2.2)
-        ctx.fillText(`Y:${box.cmyk.y.toFixed(2)}`, xPx + p, yPx + p + fontSize * 3.4)
-        ctx.fillText(`K:${box.cmyk.k.toFixed(2)}`, xPx + p, yPx + p + fontSize * 4.6)
+        ctx.fillText(
+          `M:${box.cmyk.m.toFixed(2)}`,
+          xPx + p,
+          yPx + p + fontSize * 2.2
+        )
+        ctx.fillText(
+          `Y:${box.cmyk.y.toFixed(2)}`,
+          xPx + p,
+          yPx + p + fontSize * 3.4
+        )
+        ctx.fillText(
+          `K:${box.cmyk.k.toFixed(2)}`,
+          xPx + p,
+          yPx + p + fontSize * 4.6
+        )
       })
     }
 
@@ -227,14 +239,19 @@ const CanvasBoard = forwardRef<CanvasBoardRef, CanvasBoardProps>(
         const pdf = new jsPDF({
           orientation: 'p',
           unit: 'mm',
-          format: [props.activePaper.w, props.activePaper.h]
+          format: [props.activePaper.w, props.activePaper.h],
+          floatPrecision: 16,
+          compress: false // Notepad ile kontrol edebilmek için şimdilik false kalsın
         })
 
         const patchSize = props.settings.patchSizeMm
 
-        // 1. Şablon Elemanlarını Vektörel Çiz (PDF Komutlarıyla)
+        // 1. Şablon Elemanlarını Çiz
         if (props.activeTemplate.type !== 'none') {
-          pdf.setFillColor(0, 0, 0)
+          // Ham enjeksiyon: 0 0 0 1 k (Tam Siyah)
+          // @ts-ignore
+          pdf.internal.write('0 0 0 1 k')
+
           const m = 5
           const w = props.activePaper.w
           const h = props.activePaper.h
@@ -255,35 +272,54 @@ const CanvasBoard = forwardRef<CanvasBoardRef, CanvasBoardProps>(
           }
         }
 
-        // 2. Kareleri ve Yazıları Vektörel Çiz
+        // 2. Kareleri ve Yazıları Çiz
         gridData.forEach(box => {
           if (type === 'print') {
-            // Kareyi Vektörel Çiz
-            const rgb = [
-              Math.round(255 * (1 - box.cmyk.c / 100) * (1 - box.cmyk.k / 100)),
-              Math.round(255 * (1 - box.cmyk.m / 100) * (1 - box.cmyk.k / 100)),
-              Math.round(255 * (1 - box.cmyk.y / 100) * (1 - box.cmyk.k / 100))
-            ]
-            pdf.setFillColor(rgb[0], rgb[1], rgb[2])
+            // KRİTİK NOKTA: Değerleri 4 ondalık basamakla string olarak hazırlıyoruz
+            const c = (box.cmyk.c / 100).toFixed(4)
+            const m = (box.cmyk.m / 100).toFixed(4)
+            const y = (box.cmyk.y / 100).toFixed(4)
+            const k = (box.cmyk.k / 100).toFixed(4)
+
+            // Ham PDF komutunu gönderiyoruz: "C M Y K k"
+            // @ts-ignore
+            pdf.internal.write(`${c} ${m} ${y} ${k} k`)
+
+            // Şimdi çizilen rect, yukarıdaki ham rengi kullanacak
             pdf.rect(box.xMm, box.yMm, patchSize, patchSize, 'F')
 
-            // Metinleri Vektörel Yaz
-            const textColor = getContrastColor(
+            const contrast = getContrastColor(
               box.cmyk.c,
               box.cmyk.m,
               box.cmyk.y,
               box.cmyk.k
             )
-            pdf.setTextColor(textColor === '#ffffff' ? 255 : 0)
+
+            if (contrast === '#ffffff') {
+              // @ts-ignore
+              pdf.internal.write('0 0 0 0 k') // Beyaz
+            } else {
+              // @ts-ignore
+              pdf.internal.write('0 0 0 1 k') // Siyah
+            }
+
             pdf.setFontSize(7)
             const p = 1
             pdf.text(`C:${box.cmyk.c.toFixed(2)}`, box.xMm + p, box.yMm + p + 2)
-            pdf.text(`M:${box.cmyk.m.toFixed(2)}`, box.xMm + p, box.yMm + p + 4.5)
+            pdf.text(
+              `M:${box.cmyk.m.toFixed(2)}`,
+              box.xMm + p,
+              box.yMm + p + 4.5
+            )
             pdf.text(`Y:${box.cmyk.y.toFixed(2)}`, box.xMm + p, box.yMm + p + 7)
-            pdf.text(`K:${box.cmyk.k.toFixed(2)}`, box.xMm + p, box.yMm + p + 9.5)
+            pdf.text(
+              `K:${box.cmyk.k.toFixed(2)}`,
+              box.xMm + p,
+              box.yMm + p + 9.5
+            )
           } else {
-            // Sadece Kesim Çizgisi (Vektörel)
-            pdf.setDrawColor(0)
+            // @ts-ignore
+            pdf.internal.write('0 0 0 1 K') // Stroke için büyük K operatörü
             pdf.setLineWidth(0.1)
             pdf.rect(box.xMm, box.yMm, patchSize, patchSize, 'S')
           }
@@ -295,7 +331,6 @@ const CanvasBoard = forwardRef<CanvasBoardRef, CanvasBoardProps>(
       }
     }))
 
-    // Sürükleme ve Zoom Handlerları...
     const handleWheel = (e: React.WheelEvent) => {
       e.preventDefault()
       setZoomLevel(prev => Math.min(3, Math.max(0.1, prev - e.deltaY * 0.001)))
